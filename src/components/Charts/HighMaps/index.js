@@ -1,8 +1,8 @@
-import React,{useState,useEffect,useRef } from 'react'
+import React,{useState,useEffect,useRef,useContext } from 'react'
 import HighChart from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import highchartsMap from 'highcharts/modules/map'
-// import {cloneDeep} from 'lodash'
+import { ThemeContext } from '../../contexts/ThemeContext'
 
 highchartsMap(HighChart)
 
@@ -41,19 +41,23 @@ const initOptions = {
 
     series: [{
         mapData: {},
-        name: 'Population',
+        name: 'Cases confirmed',
         tooltip: {
-            pointFormat: '{point.code}: {point.value} people'
+            pointFormat: `{point.name}: {point.value}`
         },
         joinBy: ['hc-key','key'],
-    }]
+    }],
+    dataLabels: {
+        enabled: true,
+        format: '{point.properties.postal}'
+    }
 }
 
-export default function HighMaps({ mapData }) {
+const HighMaps = ({ mapData }) => {
     const [options,setOptions] = useState({})
     const chartRef = useRef(null)
     const [configLoaded,setConfigLoaded] = useState(false)
-    
+    const { theme } = useContext(ThemeContext)
     useEffect(() => {
         if (mapData && Object.keys(mapData).length) {
             const fakeData = mapData.features.map((feature,index) => {
@@ -64,6 +68,10 @@ export default function HighMaps({ mapData }) {
             })
             setOptions({
                 ...initOptions,
+                chart: {
+                    height: '500',
+                    backgroundColor: theme.item.backgroundColor,
+                },
                 series: [{
                     ...initOptions.series[0],
                     mapData: mapData,
@@ -71,7 +79,7 @@ export default function HighMaps({ mapData }) {
                 },],
             })
         }
-    },[mapData])
+    },[mapData,theme.item.backgroundColor])
     useEffect(() => {
         if (chartRef && chartRef.current && chartRef.current.chart.series[0]) {
             chartRef.current.chart.series[0].update({
@@ -88,3 +96,5 @@ export default function HighMaps({ mapData }) {
         <HighchartsReact highcharts={HighChart} options={cloneDeep(options)} constructorType='mapChart' ref={chartRef}/>
     )
 }
+
+export default React.memo(HighMaps)
