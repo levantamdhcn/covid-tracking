@@ -42,7 +42,7 @@ const Dashboard = ({ countries,handleOnChange,selectedCountryId,report,reportFor
     const {theme} = React.useContext(ThemeContext)
     const [isLoading,setIsLoading] = React.useState(true)
     React.useEffect(() => {
-      if (countries.length > 0) {
+      if (countries) {
         setIsLoading(false)
       }
     },[countries])
