@@ -12,7 +12,7 @@ export const TopTen = ({ data }) => {
           {
             types.map((item) => {
               return (
-                <TopTenList data={data} type={item} theme={theme}/>
+                <TopTenList data={data} type={item} theme={theme} key={item}/>
               )
             })
           }

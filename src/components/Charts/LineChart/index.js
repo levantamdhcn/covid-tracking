@@ -85,38 +85,38 @@ const generateOptions = (data,theme) => {
     }
 }
 
+const useStyle = makeStyles({
+    wrapper: (props) => ({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: props.theme.item.backgroundColor,
+        color: props.theme.item.textColor,
+        borderBottom: '1px solid #e0e0e0',
+        padding: '20px',
+        borderRadius: '5px',
+        "& button":{
+            fontSize: '12px',
+            color: props.theme.item.iconColor,
+            borderRight: '1px solid'
+        },
+    }),
+    title: {
+        fontSize: '18px',
+        fontWeight: '500'
+    },
+    activeBtn: (props) => ({
+        fontSize: '12px',
+        color: '#f60',
+        border: '1px solid #f60'
+    })
+})
+
 const LineChart = ({ countries, countryId }) => {
     const [options,setOptions] = useState({})
     const [data,setData] = useState([])
     const [reportType,setReportType] = useState('all')
     const { theme } = React.useContext(ThemeContext)
-
-    const useStyle = makeStyles({
-        wrapper: (props) => ({
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: props.theme.item.backgroundColor,
-            color: props.theme.item.textColor,
-            borderBottom: '1px solid #e0e0e0',
-            padding: '20px',
-            borderRadius: '5px',
-        }),
-        title: {
-            fontSize: '18px',
-            fontWeight: '500'
-        },
-        btn: (props) => ({
-            fontSize: '12px',
-            color: props.theme.item.iconColor,
-            borderRight: '1px solid'
-        }),
-        activeBtn: (props) => ({
-            fontSize: '12px',
-            color: '#f60',
-            border: '1px solid #f60'
-        })
-    })
     
     useEffect(() => {
         if (countryId) {

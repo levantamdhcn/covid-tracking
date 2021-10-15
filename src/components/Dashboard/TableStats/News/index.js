@@ -65,7 +65,6 @@ export const News = () => {
                         <Button size="small">
                             <Link 
                                 className={classes.link}
-                                underlineNone='none'
                                 href="https://www.who.int/laos/news/feature-stories/detail/recovered-covid-19-health-care-workers-share-their-stories"
                             >
                                 Read More

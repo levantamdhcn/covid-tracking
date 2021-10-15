@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react'
+import React from 'react'
 import { Grid,makeStyles} from '@material-ui/core'
 import HighMaps from '../../Charts/HighMaps/index'
 import HighLights from '../Highlights/index'
@@ -12,18 +12,9 @@ const useStyle = makeStyles({
     },
 })
 
-const Summary = ({ report,selectedCountryId,reportForHighLights,data,theme }) => {
+const Summary = ({ selectedCountryId,reportForHighLights,theme,mapData }) => {
 
-    const [mapData,setMapData] = useState({})
-    useEffect(() => {
-        if(selectedCountryId){
-            import(
-                `@highcharts/map-collection/countries/${selectedCountryId.toLowerCase()}/${selectedCountryId.toLowerCase()}-all.geo.json`
-                ).then(res => {
-                    setMapData(res)
-                }) 
-        }
-    }, [selectedCountryId])
+    
 
     const classes = useStyle({ theme })
 

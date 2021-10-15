@@ -77,7 +77,6 @@ const ThemeContextProvider = ({ children }) => {
     ]
     
     const handleSelectColor = (color,event) => {
-        console.log(event)
         switch(color){
             case 'first': 
                 setTheme(themes[0])

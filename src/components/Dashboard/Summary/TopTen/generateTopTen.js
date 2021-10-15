@@ -97,11 +97,11 @@ const TopTenList = ({ data,type }) => {
     return (
         <Grid item xs={12} sm={4} md={2}>
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                <Typography variant="p" component="p" className={classes.title}>{title}</Typography>
+                <Typography component="p" className={classes.title}>{title}</Typography>
                 {
-                        list.map((item) => {
+                        list.map((item,index) => {
                             return (
-                                <ListItem className={classes.itemWrapper}>
+                                <ListItem className={classes.itemWrapper} key={index}>
                                     <div className={classes.fixFlag}>
                                         <ListItemAvatar className={classes.flagWrapper}>
                                         <Avatar variant={"rounded"} alt="logo" src={item.flag} style={{

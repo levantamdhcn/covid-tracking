@@ -7,6 +7,7 @@ import { Footer } from './components/Footer/index'
 import Charts from './components/Charts/index'
 import { ColorOptions } from './components/ColorOptions/index'
 import ThemeContextProvider from './components/contexts/ThemeContext'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,7 +24,7 @@ const useStyle = makeStyles({
     backgroundColor: '#fff',
     padding: '0px',
     margin: '0px',
-    boxShadow: '0 0 30px 0 rgb(82 63 105 / 5%);'
+    boxShadow: '0 0 30px 0 rgb(82 63 105 / 5%);',
   },
   time: {
     color: 'rgba(0, 0, 0, 0.65)',
@@ -76,33 +77,48 @@ const App = () => {
       })
     }
   },[countries,selectedCountryId])
+
+  const [mapData,setMapData] = React.useState({})
+    React.useEffect(() => {
+        if(selectedCountryId){
+            import(
+                `@highcharts/map-collection/countries/${selectedCountryId.toLowerCase()}/${selectedCountryId.toLowerCase()}-all.geo.json`
+                ).then(res => {
+                    setMapData(res)
+                }) 
+        }
+    }, [selectedCountryId])
+  
   const classes = useStyle()
   return (
     <div>
-      <ThemeContextProvider>
-      <Router>
-        <Grid container spacing={3} className={classes.grid}>
-          <Header/>
-        </Grid>
-        <Switch>
-          <Route path='/chart' component={(props) => <Charts countries={countries}/>} /> 
-          <Route exact path='/' component={(props) => <Dashboard 
-            countries={countries}
-            selectedCountryId={selectedCountryId}
-            handleOnChange={handleOnChange}
-            report={report}
-            reportForHighLights={reportForHighLights}
-          />} 
-          />
-        </Switch>
-          <Grid item xs={12}>
-            <Footer />
-          </Grid>
-          <Grid>
-            <ColorOptions />
-          </Grid>
-    </Router>
-    </ThemeContextProvider>
+        {
+          <ThemeContextProvider>
+                <Router>
+                  <Grid container spacing={3} className={classes.grid}>
+                    <Header/>
+                  </Grid>
+                  <Switch>
+                    <Route path='/chart' component={(props) =><Charts countries={countries}/>}/> 
+                    <Route exact path='/' component={(props) => <Dashboard 
+                      countries={countries}
+                      selectedCountryId={selectedCountryId}
+                      handleOnChange={handleOnChange}
+                      report={report}
+                      reportForHighLights={reportForHighLights}
+                      mapData={mapData}
+                    />} 
+                    />
+                  </Switch>
+                    <Grid item xs={12}>
+                      <Footer />
+                    </Grid>
+                    <Grid>
+                      <ColorOptions />
+                    </Grid>
+              </Router>
+        </ThemeContextProvider>
+        }
     </div>
   )
 }

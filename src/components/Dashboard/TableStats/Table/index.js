@@ -198,13 +198,13 @@ const BasicTable = ({ data }) => {
 
   return (
     <>
-    <Toolbar class={classes.tooltip}>
+    <Toolbar className={classes.tooltip}>
         <Typography
         >
           Asia
         </Typography>
     </Toolbar>
-      <TableContainer component={Paper} pageSize={5} className={classes.container}>
+      <TableContainer component={Paper} className={classes.container}>
         <Paper component="div" className={classes.searchWrapper}>
           <Typography component='p'>Search: </Typography>
         <InputBase
@@ -295,7 +295,7 @@ const BasicTable = ({ data }) => {
               .slice(page*rowsPerPage,page * rowsPerPage + rowsPerPage)
               .map((row,index) => (
                 <TableRow
-                  key={row.name}
+                  key={row.country}
                   className={index % 2 === 0 ? classes.oddRow : classes.evenRow }
                 >
                   <TableCell align="left" className={classes.cell}>{index+1}</TableCell>

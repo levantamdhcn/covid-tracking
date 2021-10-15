@@ -35,7 +35,7 @@ const HighLights = ({ report,theme }) => {
             {
                 summary.map((item) => {
                     return (
-                        <Grid item xs={12} sm={12} md={6}>
+                        <Grid item xs={12} sm={12} md={6} key={item.title}>
                             <HighlighCard 
                                 title={item.title} 
                                 count={item.count} 

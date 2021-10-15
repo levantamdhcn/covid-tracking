@@ -18,14 +18,16 @@ const useStyle = makeStyles((theme) => {
             position: 'fixed',
             right: '0',
             top: '25%',
-            transition: 'all 1s ease'
+            transition: 'all 1s ease',
+            zIndex: '999'
         },
         wrapperActive: {
             transform: 'translateX(0)',
             position: 'fixed',
             right: '0',
             top: '25%',
-            animation: '$translateIn ease-in 1s'
+            animation: '$translateIn linear 0.5s',
+            zIndex: '999'
         },
         colorWrapper: {
             display: 'flex',
@@ -120,13 +122,12 @@ export const ColorOptions = () => {
     const handleChangeBackground = (select) => (event) => {
         handleSelectColor(select)
         setSelectedBackground(select)
-        console.log(select)
     }
     const classes = useStyle({ theme })
     return (
         <div className={`${exit === true ? classes.wrapper :  classes.wrapperActive}`}>
             <div className={`${classes.toggleBtn}`} onClick={() => setExit(() => setExit(!exit))}>
-                <i class="fas fa-cog"></i>
+                <i className="fas fa-cog"></i>
             </div>
             <div className={classes.colorPanel}>
                 <h3>Background Color</h3>
@@ -135,6 +136,7 @@ export const ColorOptions = () => {
                         colors.map((el) => {
                             return (
                                 <span 
+                                    key={el.class}
                                     className={`${ selectedBackground === el.select ? classes.colorActiveSpan : classes.colorSpan}
                                      ${classes[el.class]}`}
                                     onClick={handleChangeBackground(el.select)}
