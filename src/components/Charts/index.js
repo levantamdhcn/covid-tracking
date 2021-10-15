@@ -18,9 +18,9 @@ const Charts = ({ countries }) => {
     let dataToDisplay = ['VN','AU','CN','ID','CU','MM']
     const [loading,setLoading] = React.useState(true)
     React.useEffect(()=>{
-        if(countries.length > 0) {
+        setTimeout(() => {
             setLoading(false)
-        }
+        },500)
     },[countries])
     const { theme } = React.useContext(ThemeContext)
     const classes = useStyle({ theme })
