@@ -36,9 +36,9 @@ const Summary = ({ report,selectedCountryId,reportForHighLights,data,theme }) =>
                     </Grid>
                     <Grid item sm={12}>
                         <Grid container spacing={3}>
-                            <Grid item sm={6}>
+                            <Grid item xs={12} sm={6}>
                                 <Grid container spacing={3}>
-                                    <Grid item sm={12}>
+                                    <Grid item xs={12} sm={12}>
                                         <HighlighCard 
                                             title={'Today cases'} 
                                             count={reportForHighLights.todayCases} 
@@ -47,7 +47,7 @@ const Summary = ({ report,selectedCountryId,reportForHighLights,data,theme }) =>
                                             theme={theme}
                                         />
                                     </Grid>
-                                    <Grid item sm={12}>
+                                    <Grid item xs={12} sm={12}>
                                         <HighlighCard 
                                             title={'Today deaths'} 
                                             count={reportForHighLights.todayDeaths} 
@@ -59,7 +59,7 @@ const Summary = ({ report,selectedCountryId,reportForHighLights,data,theme }) =>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item sm={6}>
+                            <Grid item xs={12} sm={6}>
                                 <PieCharts data={reportForHighLights} theme={theme}/>     
                             </Grid>
                         </Grid>

@@ -48,7 +48,7 @@ const Dashboard = ({ countries,handleOnChange,selectedCountryId,report,reportFor
                 </Typography>
             </Grid>
             
-            <Grid item xs={4} className={classes.countrySelector}>
+            <Grid item xs={12} className={classes.countrySelector}>
                 <CountrySelector 
                   countries = {countries} 
                   handleOnChange={handleOnChange} 
